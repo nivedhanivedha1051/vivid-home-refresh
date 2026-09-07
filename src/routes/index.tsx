@@ -4,7 +4,7 @@ import { useState, type CSSProperties, type PointerEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { CatalogGrid } from "@/components/catalog-grid";
 import { courses, products, services } from "@/lib/catalog";
-import hero from "@/assets/tevexxo-hero.jpg.asset.json";
+import hero from "@/assets/tevexxo-hero-new.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
