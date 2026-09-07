@@ -164,6 +164,17 @@
   transition: mask-position .15s ease-out;
 }
 
+.cursor-grid {
+  --cursor-grid-x: 0px;
+  --cursor-grid-y: 0px;
+  background-image: linear-gradient(color-mix(in oklab, var(--accent) 11%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--accent) 11%, transparent) 1px, transparent 1px);
+  background-position: var(--cursor-grid-x) var(--cursor-grid-y);
+  background-size: 48px 48px;
+  opacity: .42;
+  transition: background-position .22s ease-out;
+  will-change: background-position;
+}
+
 .social-grid {
   --grid-x: 0px;
   --grid-y: 0px;
@@ -197,6 +208,6 @@
 .service-tile:hover { background-color: color-mix(in oklab, var(--card) 78%, var(--accent)); transform: translateY(-3px); }
 
 @media (prefers-reduced-motion: reduce) {
-  .social-grid, .social-card, .catalog-card, .catalog-card img { transition: none; }
+  .cursor-grid, .social-grid, .social-card, .catalog-card, .catalog-card img { transition: none; }
   .social-card:hover, .catalog-card:hover { transform: none; }
 }

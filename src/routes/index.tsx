@@ -3,6 +3,7 @@ import { ArrowRight, Facebook, Instagram, MessageCircle, Twitter } from "lucide-
 import { useState, type CSSProperties, type PointerEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { CatalogGrid } from "@/components/catalog-grid";
+import { CursorGrid } from "@/components/cursor-grid";
 import { courses, products, services } from "@/lib/catalog";
 import hero from "@/assets/tevexxo-hero-new.jpg.asset.json";
 
@@ -74,7 +75,7 @@ function Home() {
     <section className="relative flex min-h-[720px] items-center overflow-hidden border-b border-border">
       <img src={hero.url} alt="Luminous digital wave representing Tevexxo technology" width={1920} height={1088} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
       <div className="hero-shade absolute inset-0" />
-      <div className="pointer-grid absolute inset-0" aria-hidden="true" />
+      <CursorGrid />
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 lg:px-8">
         <div className="max-w-3xl"><p className="section-tag"><span className="pulse-dot" /> Next-gen tech studio</p><h1 className="font-display mt-6 text-5xl font-bold leading-[1.05] sm:text-6xl lg:text-8xl">We build the tech <span className="text-gradient">your business runs on.</span></h1><p className="mt-7 max-w-2xl border-l-2 border-accent/40 pl-5 text-lg leading-8 text-muted-foreground">We design and ship software, train future-ready engineers, and partner with ambitious teams to turn complex ideas into working products.</p><div className="mt-9 flex flex-wrap gap-3"><Button asChild size="lg"><Link to="/contact">Start a project <ArrowRight className="size-4" /></Link></Button><Button asChild size="lg" variant="outline"><Link to="/courses">Explore courses</Link></Button></div></div>
         <div className="mt-20 grid max-w-3xl grid-cols-2 gap-8 border-t border-border pt-7 sm:grid-cols-4">{[["120+","Projects"],["40+","Clients"],["3,500+","Learners"],["6 yrs","Building"]].map(([number,label]) => <div key={label}><strong className="font-display text-2xl">{number}</strong><p className="mt-1 text-xs text-muted-foreground">{label}</p></div>)}</div>
