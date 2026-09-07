@@ -1,0 +1,5 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { CatalogPage } from "@/components/catalog-page";
+import { services } from "@/lib/catalog";
+
+export const Route=createFileRoute("/services")({head:()=>({meta:[{title:"Software Services — Tevexxo"},{name:"description",content:"Web, mobile, cloud and AI engineering services from Tevexxo."},{property:"og:title",content:"Software Services — Tevexxo"},{property:"og:description",content:"Digital products engineered from strategy to scale."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:()=> <CatalogPage eyebrow="Services" title="Engineering that moves business forward." intro="A focused product team for ambitious builds, complex modernization and reliable scale." items={services}/>});

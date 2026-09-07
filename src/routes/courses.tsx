@@ -1,0 +1,5 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { CatalogPage } from "@/components/catalog-page";
+import { courses } from "@/lib/catalog";
+
+export const Route=createFileRoute("/courses")({head:()=>({meta:[{title:"Technology Courses — Tevexxo Academy"},{name:"description",content:"Practical full stack, UI/UX, AI and DevOps programs."},{property:"og:title",content:"Technology Courses — Tevexxo Academy"},{property:"og:description",content:"Learn with engineers who build and ship real products."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:()=> <CatalogPage eyebrow="Tevexxo Academy" title="Learn the work by doing the work." intro="Live, cohort-led programs grounded in practical projects, useful feedback and production habits." items={courses}/>});
