@@ -211,3 +211,12 @@
   .cursor-grid, .social-grid, .social-card, .catalog-card, .catalog-card img { transition: none; }
   .social-card:hover, .catalog-card:hover { transform: none; }
 }
+
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; will-change: opacity, transform; }
+.reveal-in { opacity: 1; transform: none; }
+
+.glass-panel { background: color-mix(in oklab, var(--card) 72%, transparent); backdrop-filter: blur(14px); box-shadow: inset 0 1px 0 color-mix(in oklab, var(--accent) 14%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
