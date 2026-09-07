@@ -1,33 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, Code2, Facebook, GraduationCap, Instagram, Layers3, MessageCircle, ShieldCheck, Twitter } from "lucide-react";
-import { useState, type CSSProperties } from "react";
+import { ArrowRight, Facebook, Instagram, MessageCircle, Twitter } from "lucide-react";
+import { useState, type CSSProperties, type PointerEvent } from "react";
 import { Button } from "@/components/ui/button";
+import { CatalogGrid } from "@/components/catalog-grid";
+import { courses, products, services } from "@/lib/catalog";
 import hero from "@/assets/tevexxo-hero.jpg.asset.json";
-import product from "@/assets/tevexxo-product.jpg.asset.json";
-import academy from "@/assets/tevexxo-academy.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
-  head:()=>({meta:[{title:"Tevexxo — Software, Products & Tech Training"},{name:"description",content:"Tevexxo builds scalable software, creates focused digital products and trains the next generation of engineers."},{property:"og:title",content:"Tevexxo — Build. Learn. Scale."},{property:"og:description",content:"Engineering, products and practical technology training under one roof."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}), component: Home
+  head: () => ({ meta: [
+    { title: "Tevexxo — Software, Products & Tech Training" },
+    { name: "description", content: "Tevexxo builds scalable software, creates focused digital products and trains the next generation of engineers." },
+    { property: "og:title", content: "Tevexxo — Build. Learn. Scale." },
+    { property: "og:description", content: "Engineering, products and practical technology training under one roof." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ]}),
+  component: Home,
 });
-
-const services=[{icon:Code2,title:"Software Engineering",text:"Fast, scalable web and mobile products built for real-world growth."},{icon:Layers3,title:"Product Studio",text:"From product strategy and UX through launch, iteration and scale."},{icon:GraduationCap,title:"Tevexxo Academy",text:"Industry-led programs where learners build and ship real projects."},{icon:ShieldCheck,title:"Cloud & AI",text:"Reliable infrastructure, automation and applied intelligence."}];
-
-function CursorGrid() {
-  const [pointer, setPointer] = useState({ x: 50, y: 42 });
-  const style = { "--pointer-x": `${pointer.x}%`, "--pointer-y": `${pointer.y}%` } as CSSProperties;
-
-  return (
-    <div
-      className="pointer-grid absolute inset-0"
-      style={style}
-      onPointerMove={(event) => {
-        const bounds = event.currentTarget.getBoundingClientRect();
-        setPointer({ x: ((event.clientX - bounds.left) / bounds.width) * 100, y: ((event.clientY - bounds.top) / bounds.height) * 100 });
-      }}
-      aria-hidden="true"
-    />
-  );
-}
 
 const socialLinks = [
   { label: "Instagram", icon: Instagram, href: "https://www.instagram.com/" },
@@ -36,9 +25,64 @@ const socialLinks = [
   { label: "Twitter / X", icon: Twitter, href: "https://x.com/" },
 ];
 
-function Home(){return <main className="pt-18">
-  <section className="relative flex min-h-[760px] items-center overflow-hidden border-b border-border"><img src={hero.url} alt="Luminous digital wave representing Tevexxo technology" width={1920} height={1088} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover"/><div className="hero-shade absolute inset-0"/><CursorGrid/><div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 lg:px-8"><div className="max-w-3xl"><p className="section-tag"><span className="pulse-dot"/> Next-gen tech studio</p><h1 className="font-display mt-6 text-5xl font-bold leading-[1.05] sm:text-6xl lg:text-8xl">We build the tech <span className="text-gradient">your business runs on.</span></h1><p className="mt-7 max-w-2xl border-l-2 border-accent/40 pl-5 text-lg leading-8 text-muted-foreground">We design and ship software, train future-ready engineers, and partner with ambitious teams to turn complex ideas into working products.</p><div className="mt-9 flex flex-wrap gap-3"><Button asChild size="lg"><Link to="/contact">Start a project <ArrowRight className="size-4"/></Link></Button><Button asChild size="lg" variant="outline"><Link to="/courses">Explore courses</Link></Button></div></div><div className="mt-20 grid max-w-3xl grid-cols-2 gap-8 border-t border-border pt-7 sm:grid-cols-4">{[["120+","Projects"],["40+","Clients"],["3,500+","Learners"],["6 yrs","Building"]].map(([n,l])=><div key={l}><strong className="font-display text-2xl">{n}</strong><p className="mt-1 text-xs text-muted-foreground">{l}</p></div>)}</div></div></section>
-  <section className="mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32"><div className="max-w-2xl"><p className="section-tag">What we do</p><h2 className="font-display mt-4 text-4xl font-bold sm:text-5xl">One team. Three ways to move forward.</h2></div><div className="mt-14 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">{services.map(({icon:Icon,title,text})=><article key={title} className="group service-tile bg-card p-7"><Icon className="size-6 text-accent transition-transform duration-300 group-hover:scale-110"/><h3 className="font-display mt-10 text-xl font-semibold">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{text}</p><div className="service-line mt-7 h-px w-10 bg-accent transition-all duration-500 group-hover:w-full"/></article>)}</div></section>
-  <section className="border-y border-border bg-secondary/35"><div className="mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32"><div className="flex flex-wrap items-end justify-between gap-6"><div><p className="section-tag">Explore the work</p><h2 className="font-display mt-4 text-4xl font-bold sm:text-5xl">Built to be experienced.</h2></div><p className="max-w-md text-sm leading-7 text-muted-foreground">Move across the studio: real projects, practical courses and ideas from the people shipping them.</p></div><div className="mt-14 grid gap-8 lg:grid-cols-[1.35fr_.65fr]"><Link to="/projects" className="depth-card group relative min-h-[390px] overflow-hidden rounded-lg border border-border"><img src={product.url} alt="Tevexxo product analytics interface" width={1200} height={912} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"/><div className="card-image-shade absolute inset-0"/><div className="relative z-10 flex h-full flex-col justify-end p-8 lg:p-10"><span className="section-tag">Selected projects</span><h3 className="font-display mt-4 text-3xl font-bold">Systems that make complex work feel clear.</h3><span className="mt-6 flex items-center gap-2 text-sm font-semibold text-accent">View projects <ArrowRight className="size-4 transition-transform group-hover:translate-x-1"/></span></div></Link><Link to="/courses" className="depth-card group relative min-h-[390px] overflow-hidden rounded-lg border border-border"><img src={academy.url} alt="Digital pathways representing Tevexxo technology education" width={1200} height={912} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"/><div className="card-image-shade absolute inset-0"/><div className="relative z-10 flex h-full flex-col justify-end p-8"><BookOpen className="size-7 text-accent"/><span className="section-tag mt-7">Tevexxo Academy</span><h3 className="font-display mt-4 text-2xl font-bold">Learn the work by doing the work.</h3><span className="mt-6 flex items-center gap-2 text-sm font-semibold text-accent">View courses <ArrowRight className="size-4 transition-transform group-hover:translate-x-1"/></span></div></Link></div></div></section>
-  <section className="mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32"><div className="flex flex-wrap items-end justify-between gap-6"><div><p className="section-tag">From the workbench</p><h2 className="font-display mt-4 text-4xl font-bold sm:text-5xl">Ideas worth sharing.</h2></div><Button asChild variant="outline"><Link to="/blogs">Read the blog <ArrowRight className="size-4"/></Link></Button></div><div className="mt-14 grid gap-8 lg:grid-cols-[1fr_1.2fr]"><Link to="/blogs" className="depth-card group relative overflow-hidden rounded-lg border border-border bg-card p-8 lg:p-10"><span className="font-mono text-xs text-accent">01 / INSIGHT</span><h3 className="font-display mt-16 text-3xl font-bold">Why we chose edge-first rendering.</h3><p className="mt-4 max-w-lg leading-7 text-muted-foreground">The performance, reliability and delivery trade-offs behind a major platform decision.</p><span className="mt-8 flex items-center gap-2 text-sm font-semibold text-accent">Read article <ArrowRight className="size-4 transition-transform group-hover:translate-x-1"/></span></Link><div className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border">{socialLinks.map(({label,icon:Icon,href})=><a key={label} href={href} target="_blank" rel="noreferrer" className="group flex min-h-36 flex-col justify-between bg-card p-6 transition-colors hover:bg-secondary"><Icon className="size-6 text-accent transition-transform duration-300 group-hover:scale-110"/><span className="flex items-center justify-between text-sm font-semibold">{label}<ArrowRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent"/></span></a>)}</div></div></section>
-</main>}
+function SocialSection() {
+  const [position, setPosition] = useState({ x: 50, y: 50, gridX: 0, gridY: 0 });
+  const style = {
+    "--pointer-x": `${position.x}%`, "--pointer-y": `${position.y}%`,
+    "--grid-x": `${position.gridX}px`, "--grid-y": `${position.gridY}px`,
+  } as CSSProperties;
+
+  function handlePointerMove(event: PointerEvent<HTMLElement>) {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width;
+    const y = (event.clientY - bounds.top) / bounds.height;
+    setPosition({ x: x * 100, y: y * 100, gridX: (x - .5) * 18, gridY: (y - .5) * 18 });
+  }
+
+  return (
+    <section className="social-grid relative overflow-hidden border-y border-border bg-secondary/35" style={style} onPointerMove={handlePointerMove}>
+      <div className="social-shade pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
+        <div className="max-w-2xl"><p className="section-tag">Stay connected</p><h2 className="font-display mt-4 text-4xl font-bold sm:text-5xl">Follow what we’re building.</h2></div>
+        <div className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {socialLinks.map(({ label, icon: Icon, href }) => (
+            <a key={label} href={href} target="_blank" rel="noreferrer" className="social-card group flex min-h-40 flex-col justify-between rounded-lg border border-border bg-card/90 p-6" aria-label={`Follow Tevexxo on ${label}`}>
+              <Icon className="size-7 text-accent" aria-hidden="true" />
+              <span className="flex items-center justify-between gap-3 text-sm font-semibold">{label}<ArrowRight className="size-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent" /></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CollectionPreview({ eyebrow, title, intro, items, to }: { eyebrow: string; title: string; intro: string; items: typeof services; to: "/services" | "/courses" }) {
+  return (
+    <section className="mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
+      <div className="grid items-end gap-6 sm:grid-cols-[minmax(0,1fr)_auto]">
+        <div className="min-w-0"><p className="section-tag">{eyebrow}</p><h2 className="font-display mt-4 text-4xl font-bold sm:text-5xl">{title}</h2><p className="mt-4 max-w-2xl leading-7 text-muted-foreground">{intro}</p></div>
+      </div>
+      <div className="mt-12"><CatalogGrid items={items.slice(0, 3)} headingLevel="h3" /></div>
+      <div className="mt-10 flex justify-center"><Button asChild variant="outline" size="lg"><Link to={to}>View all <ArrowRight className="size-4" /></Link></Button></div>
+    </section>
+  );
+}
+
+function Home() {
+  return <main className="pt-18">
+    <section className="relative flex min-h-[720px] items-center overflow-hidden border-b border-border">
+      <img src={hero.url} alt="Luminous digital wave representing Tevexxo technology" width={1920} height={1088} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
+      <div className="hero-shade absolute inset-0" />
+      <div className="pointer-grid absolute inset-0" aria-hidden="true" />
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 lg:px-8">
+        <div className="max-w-3xl"><p className="section-tag"><span className="pulse-dot" /> Next-gen tech studio</p><h1 className="font-display mt-6 text-5xl font-bold leading-[1.05] sm:text-6xl lg:text-8xl">We build the tech <span className="text-gradient">your business runs on.</span></h1><p className="mt-7 max-w-2xl border-l-2 border-accent/40 pl-5 text-lg leading-8 text-muted-foreground">We design and ship software, train future-ready engineers, and partner with ambitious teams to turn complex ideas into working products.</p><div className="mt-9 flex flex-wrap gap-3"><Button asChild size="lg"><Link to="/contact">Start a project <ArrowRight className="size-4" /></Link></Button><Button asChild size="lg" variant="outline"><Link to="/courses">Explore courses</Link></Button></div></div>
+        <div className="mt-20 grid max-w-3xl grid-cols-2 gap-8 border-t border-border pt-7 sm:grid-cols-4">{[["120+","Projects"],["40+","Clients"],["3,500+","Learners"],["6 yrs","Building"]].map(([number,label]) => <div key={label}><strong className="font-display text-2xl">{number}</strong><p className="mt-1 text-xs text-muted-foreground">{label}</p></div>)}</div>
+      </div>
+    </section>
+    <CollectionPreview eyebrow="What we do" title="Engineering that moves business forward." intro="A focused product team for ambitious builds, complex modernization and reliable scale." items={services} to="/services" />
+    <div className="border-y border-border bg-secondary/20"><CollectionPreview eyebrow="Tevexxo Academy" title="Learn the work by doing the work." intro="Live, cohort-led programs grounded in practical projects, useful feedback and production habits." items={courses} to="/courses" /></div>
+    <section className="mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32"><div className="max-w-2xl"><p className="section-tag">Our products</p><h2 className="font-display mt-4 text-4xl font-bold sm:text-5xl">Tools shaped by real work.</h2><p className="mt-4 leading-7 text-muted-foreground">Focused software products for modern teams, each built to remove friction instead of adding it.</p></div><div className="mt-12"><CatalogGrid items={products} headingLevel="h3" /></div></section>
+    <SocialSection />
+  </main>;
+}
