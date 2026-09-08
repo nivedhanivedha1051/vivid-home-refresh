@@ -25,13 +25,13 @@ export function ProjectCarousel({ items }: { items: CarouselItem[] }) {
       className="relative mx-auto w-full max-w-3xl"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      onTouchStart={(e) => { touchStart.current = e.touches[0].clientX; setPaused(true); }}
+      onTouchStart={(e) => { touchStart.current = e.touches[0]?.clientX ?? null; setPaused(true); }}
       onTouchEnd={(e) => {
         const start = touchStart.current;
         touchStart.current = null;
         setPaused(false);
         if (start === null) return;
-        const dx = e.changedTouches[0].clientX - start;
+        const dx = (e.changedTouches[0]?.clientX ?? start) - start;
         if (Math.abs(dx) > 45) go(active + (dx < 0 ? 1 : -1));
       }}
       role="region"
