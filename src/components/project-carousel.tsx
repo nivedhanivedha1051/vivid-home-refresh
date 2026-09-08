@@ -11,14 +11,28 @@ export function ProjectCarousel({ items }: { items: CarouselItem[] }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchStart = useRef<number | null>(null);
+  const timer = useRef<number | null>(null);
 
-  const go = useCallback((i: number) => setActive(((i % items.length) + items.length) % items.length), [items.length]);
+  const clearTimer = useCallback(() => {
+    if (timer.current !== null) { window.clearInterval(timer.current); timer.current = null; }
+  }, []);
+
+  const startTimer = useCallback(() => {
+    clearTimer();
+    if (items.length < 2) return;
+    timer.current = window.setInterval(() => setActive((p) => (p + 1) % items.length), AUTOPLAY_MS);
+  }, [clearTimer, items.length]);
+
+  const go = useCallback((i: number) => {
+    setActive(((i % items.length) + items.length) % items.length);
+    startTimer(); // manual navigation resets the 5s autoplay timer
+  }, [items.length, startTimer]);
 
   useEffect(() => {
-    if (paused || items.length < 2) return;
-    const id = window.setInterval(() => setActive((p) => (p + 1) % items.length), AUTOPLAY_MS);
-    return () => window.clearInterval(id);
-  }, [paused, items.length]);
+    if (paused) { clearTimer(); return; }
+    startTimer();
+    return clearTimer;
+  }, [paused, startTimer, clearTimer]);
 
   return (
     <div
