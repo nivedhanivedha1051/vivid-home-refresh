@@ -175,6 +175,27 @@
   will-change: background-position;
 }
 
+.programs-grid-page {
+  --programs-pointer-x: 50%;
+  --programs-pointer-y: 24rem;
+  isolation: isolate;
+}
+
+.programs-grid-base,
+.programs-grid-glow {
+  background-image: linear-gradient(color-mix(in oklab, var(--accent) 8%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--accent) 8%, transparent) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+.programs-grid-base { opacity: .36; }
+
+.programs-grid-glow {
+  background-image: linear-gradient(color-mix(in oklab, var(--primary) 52%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--primary) 52%, transparent) 1px, transparent 1px);
+  mask-image: radial-gradient(circle 220px at var(--programs-pointer-x) var(--programs-pointer-y), black 0%, transparent 72%);
+  opacity: .8;
+  will-change: mask-image;
+}
+
 .social-grid {
   --grid-x: 0px;
   --grid-y: 0px;
@@ -208,7 +229,7 @@
 .service-tile:hover { background-color: color-mix(in oklab, var(--card) 78%, var(--accent)); transform: translateY(-3px); }
 
 @media (prefers-reduced-motion: reduce) {
-  .cursor-grid, .social-grid, .social-card, .catalog-card, .catalog-card img { transition: none; }
+  .cursor-grid, .social-grid, .social-card, .catalog-card, .catalog-card img, .programs-grid-glow { transition: none; }
   .social-card:hover, .catalog-card:hover { transform: none; }
 }
 
