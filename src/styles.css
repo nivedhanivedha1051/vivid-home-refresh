@@ -192,8 +192,22 @@
 .programs-grid-glow {
   background-image: linear-gradient(color-mix(in oklab, var(--primary) 52%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--primary) 52%, transparent) 1px, transparent 1px);
   mask-image: radial-gradient(circle 220px at var(--programs-pointer-x) var(--programs-pointer-y), black 0%, transparent 72%);
-  opacity: .8;
+  opacity: 0;
+  transition: opacity .38s ease-out;
   will-change: mask-image;
+}
+
+.programs-grid-active .programs-grid-glow { opacity: .8; }
+
+.programs-grid-trail-mark {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(color-mix(in oklab, var(--primary) 58%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--primary) 58%, transparent) 1px, transparent 1px);
+  background-size: 52px 52px;
+  filter: drop-shadow(0 0 5px color-mix(in oklab, var(--primary) 42%, transparent));
+  mask-image: radial-gradient(circle 115px at var(--programs-trail-x) var(--programs-trail-y), black 0%, transparent 78%);
+  opacity: 0;
+  will-change: opacity;
 }
 
 .social-grid {
@@ -230,6 +244,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .cursor-grid, .social-grid, .social-card, .catalog-card, .catalog-card img, .programs-grid-glow { transition: none; }
+  .programs-grid-glow, .programs-grid-trail { display: none; }
   .social-card:hover, .catalog-card:hover { transform: none; }
 }
 
