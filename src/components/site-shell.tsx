@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CursorGrid } from "@/components/cursor-grid";
 
 const links = [
-  ["Home", "/"], ["Programs", "/programs"], ["Services", "/services"], ["Products", "/products"], ["Courses", "/courses"],
+  ["Home", "/"], ["Services", "/services"], ["Products", "/products"],
   ["Projects", "/projects"], ["Why Us", "/why-us"], ["About", "/about"], ["Blogs", "/blogs"],
 ] as const;
 
